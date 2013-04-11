@@ -14,10 +14,11 @@ class ProductsController < ApplicationController
   # GET /products/1.json
   def show
     @product = Product.find(params[:id])
-    
-      reviews = Review.all
-      product_reviews = reviews.select{|r| r.product_id == @product.id}
-    @product_reviews_body = product_reviews.map{|r| r.body}
+    @reviews = Review.where(:product_id => @product.id)
+    # ------------ My first approach on Review Body -------
+    #   reviews = Review.all
+    #   product_reviews = reviews.select{|r| r.product_id == @product.id}
+    # @product_reviews_body = product_reviews.map{|r| r.body}
 
     respond_to do |format|
       format.html # show.html.erb

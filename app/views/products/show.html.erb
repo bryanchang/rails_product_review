@@ -13,8 +13,8 @@
 <p>
 	<b>Reviews:</b>
 	<ul>
-	<% @product_reviews_body.each do |body|%>
-		<li><blockquote><%=body %></blockquote></li>
+	<% @reviews.each do |review|%>
+		<li><blockquote><%= review.body %></blockquote></li>
 	<% end %>
 	</ul>
 </p>
