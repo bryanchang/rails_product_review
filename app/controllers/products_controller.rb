@@ -1,6 +1,15 @@
 class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
+  before_filter :products_in_cart
+
+  def products_in_cart
+    @products_in_cart = Product.where(:in_cart => true)
+    @prices_in_cart = @product_in_cart.map{|p| p.price}
+    @total_price = @prices_in_cart.inject(:+)
+  end
+
+
   def index
     @products = Product.all
 
@@ -19,6 +28,10 @@ class ProductsController < ApplicationController
     #   reviews = Review.all
     #   product_reviews = reviews.select{|r| r.product_id == @product.id}
     # @product_reviews_body = product_reviews.map{|r| r.body}
+
+    file = open("https://www.googleapis.com/shopping/search/v1/public/products?key=AIzaSyAypfaGqJYG0kPrsTGhzfZN2VXg0JcRS-0&country=US&q=#{URI.escape(@product.name)}&alt=json", :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE)
+    @result = JSON.load(file.read)['items'][0]['product']
+
 
     respond_to do |format|
       format.html # show.html.erb

@@ -1,8 +1,14 @@
 RailsStore::Application.routes.draw do
-  resources :reviews
+  # resources :reviews
+  get '/reviews/new(.:format)', :to => 'reviews#new', :as => 'new_review'
+  post '/reviews', :to => 'reviews#create'
 
+  get '/reviews', :to => 'reviews#index', :as => 'reviews'
 
   resources :products
+
+  # get '/products/@product_id/add_cart(.:format)', :to => 'products#add_cart', :as => 'add_cart'
+  # get '/products/@product_id/remove_cart(.:format)', :to => 'products#remove_cart', :as => 'remove_cart'
 
 
   # The priority is based upon order of creation:

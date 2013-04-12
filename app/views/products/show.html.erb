@@ -1,5 +1,13 @@
 <p id="notice"><%= notice %></p>
 
+<div class="product_detail_image">
+	<img src="<%=@result['images'][0]['link']%>">
+</div>
+
+<div class="product_detail_description">
+	<p> <%= @result['description'] %> </p>
+</div>
+
 <p>
   <b>Name:</b>
   <%= @product.name %>
@@ -19,6 +27,7 @@
 	</ul>
 </p>
 
-<a href="/reviews/new?product_id=<%=@product.id%>"> Write a new review</a> |
+<%= link_to 'Write a new review', new_review_path %> |
+<!-- <a href="/reviews/new?product_id=<%=@product.id%>"> Write a new review</a> | -->
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
